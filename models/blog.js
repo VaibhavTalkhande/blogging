@@ -1,37 +1,28 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require("mongoose");
 
-const BlogSchema = new mongoose.Schema({
+const blogSchema = new Schema(
+  {
     title: {
-        type: String,
-        required: [true, "Title is required"],
-        minlength: [2, "Title must be at least 2 characters long"]
+      type: String,
+      required: true,
     },
-    content: {
-        type: String,
-        required: [true, "Content is required"],
-        minlength: [2, "Content must be at least 2 characters long"]
+    body: {
+      type: String,
+      required: true, 
     },
-    views: {
-        type: Number,
-        default: 0
-    },
-    likes: {
-        type: Number,
-        default: 0
+    coverImageURL: {
+      type: String,
+      required: false,
     },
     createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: [true, "Creator is required"],
-        minlength: [2, "Creator must be at least 2 characters long"]
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      
+    },   
+  },
+  { timestamps: true }
+);
 
-}, { timestamps: true });
-
-const Blog = mongoose.model("Blog", BlogSchema);
+const Blog = model("blog", blogSchema);
 
 module.exports = Blog;

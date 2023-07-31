@@ -12,14 +12,14 @@ const renderSignup = (req,res) => {
 }
 //controller for creating a new user
 const createUser = async (req,res) => {
-    const {name,email,password} = req.body
-    const user = await User.create({name,email,password})
+    const {fullName,email,password} = req.body
+    const user = await User.create({fullName,email,password})
     const token = createToken(user)
-    res.cookie('token',token)
+    res.cookie('token',token) 
     
-    return res.redirect('/')
+    return res.redirect('/') 
 }
-//controller for logout
+//controller for logout 
 const logoutUser = (req,res) => {
     const token = req.cookies.token;
     res.clearCookie('token');
